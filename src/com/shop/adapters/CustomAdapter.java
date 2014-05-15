@@ -1,7 +1,9 @@
-package com.example.shop;
+package com.shop.adapters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.example.shop.R;
 
 import android.content.Context;
 import android.graphics.Typeface;

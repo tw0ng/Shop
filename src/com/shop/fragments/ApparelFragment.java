@@ -1,5 +1,8 @@
-package com.example.shop;
+package com.shop.fragments;
 
+
+import com.example.shop.R;
+import com.shop.MainActivity;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -11,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class HomeFragment extends Fragment{
-	public HomeFragment() {
+public class ApparelFragment extends Fragment{
+	public ApparelFragment() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -25,8 +28,8 @@ public class HomeFragment extends Fragment{
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static HomeFragment newInstance(int sectionNumber) {
-		HomeFragment fragment = new HomeFragment();
+	public static ApparelFragment newInstance(int sectionNumber) {
+		ApparelFragment fragment = new ApparelFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 		fragment.setArguments(args);
@@ -36,7 +39,7 @@ public class HomeFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_home, container,
+		View rootView = inflater.inflate(R.layout.fragment_apparel, container,
 				false);
 		TextView textView = (TextView) rootView
 				.findViewById(R.id.section_label);

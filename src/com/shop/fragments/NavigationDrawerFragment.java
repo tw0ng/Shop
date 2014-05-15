@@ -1,7 +1,10 @@
-package com.example.shop;
+package com.shop.fragments;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.example.shop.R;
+import com.shop.adapters.CustomAdapter;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
