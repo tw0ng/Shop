@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" 
-    android:background="#000000">
+    android:background="#FFFFFF">
     <com.shop.util.ImageViewResize
         android:id="@+id/product_pic"
         android:layout_width="fill_parent"
@@ -18,7 +18,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium" 
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
+        android:gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>

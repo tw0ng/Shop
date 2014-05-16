@@ -3,12 +3,15 @@ package com.shop.adapters;
 import java.util.ArrayList;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.shop.fragments.HomeFragment;
 import com.shop.objects.Product;
 import com.example.shop.R;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -41,7 +44,8 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 		    
 			ImageLoader.getInstance().displayImage(item.getUrls().get(0), productImage);
 			
-			productDesc.setText(item.getDescription());
+			productDesc.setText(item.getName());
+            
 			
 		}
 		return view;

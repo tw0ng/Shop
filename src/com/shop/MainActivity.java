@@ -72,7 +72,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		Log.d("Item Clicked", "The position is " + position);
 		switch (position) {
-		case 1:
+		case 0:
 			fragmentManager.beginTransaction().replace(R.id.container, HomeFragment.newInstance(position + 1)).commit();
 			break;
 		case 2:

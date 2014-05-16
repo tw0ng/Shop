@@ -13,9 +13,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,6 +38,11 @@ public class RacketsFragment extends Fragment{
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR800_2.jpg");
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR800_3.jpg");
 		rackets.add(new Product("NANORAY 800", "X-FULLERINE combined with SONIC METAL produces a fast and controlled swing that generates powerfully accurate, rapid-fire shots.",urls,null));
+		urls = new ArrayList<String>();
+		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR-ZSP_1-1.jpg");
+		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR-ZSP_2.jpg");
+		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR-ZSP_3.jpg");
+		rackets.add(new Product("NANORAY Z-SPEED", "The world’s fastest racquet.",urls,null));
 	}
 
 	/**
@@ -53,7 +61,17 @@ public class RacketsFragment extends Fragment{
 		ListView rootView = (ListView) inflater.inflate(R.layout.fragment_rackets, container,
 				false);
 		ProductAdapter racketadapter = new ProductAdapter(getActivity().getApplicationContext(),R.layout.fragment_rackets, rackets);
+        rootView.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Log.d("The position for racquets is","The position is "+ position + " There is a racquet? " + rackets.get(position).getName());
+				getFragmentManager().beginTransaction().replace(R.id.container, ProductFragment.newInstance(rackets.get(position))).commit();
+			}
+        	
+        });
 		rootView.setAdapter(racketadapter);
 		return rootView;
 	}

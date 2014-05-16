@@ -14,4 +14,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
+    <string name="contact_header">Contact Info</string>
+    <string name="location">37800 Central Ct Newark, CA 94560</string>
+    <string name="phone">5106664292</string>
+    <string name="email">kakinami@aol.com</string>
 </resources>
