@@ -1,5 +1,7 @@
 package com.shop;
 
+import java.util.ArrayList;
+
 import com.example.shop.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -13,6 +15,7 @@ import com.shop.fragments.NavigationDrawerFragment;
 import com.shop.fragments.RacketsFragment;
 import com.shop.fragments.ShoesFragment;
 import com.shop.fragments.StringingServicesFragment;
+import com.shop.objects.Product;
 import com.shop.util.Util;
 
 import android.app.Activity;
@@ -25,6 +28,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +36,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity implements
@@ -64,47 +69,55 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 		DisplayImageOptions displayopts = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisc(true).build();
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext()).memoryCacheExtraOptions(Util.getActivityWidth(this) * 5, Util.getActivityHeight(this) * 5).defaultDisplayImageOptions(displayopts).build();
 		ImageLoader.getInstance().init(config);
+		setupData();
 	}
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getSupportFragmentManager();
-		Log.d("Item Clicked", "The position is " + position);
+
 		switch (position) {
 		case 0:
-			fragmentManager.beginTransaction().replace(R.id.container, HomeFragment.newInstance(position + 1)).commit();
+			if(fragmentManager.findFragmentByTag("HOME") == null || !fragmentManager.findFragmentByTag("HOME").isVisible())
+				fragmentManager.beginTransaction().replace(R.id.container, HomeFragment.newInstance(position + 1), "HOME").addToBackStack(null).commit();
 			break;
 		case 2:
-			fragmentManager.beginTransaction().replace(R.id.container, StringingServicesFragment.newInstance()).commit();
+			if(fragmentManager.findFragmentByTag("STRINGING") == null || !fragmentManager.findFragmentByTag("STRINGING").isVisible())
+				fragmentManager.beginTransaction().replace(R.id.container, StringingServicesFragment.newInstance(),"STRINGING").addToBackStack(null).commit();
 			break;
 		case 3:
-			fragmentManager.beginTransaction().replace(R.id.container, AboutFragment.newInstance()).commit();
+			if(fragmentManager.findFragmentByTag("ABOUT") == null || !fragmentManager.findFragmentByTag("ABOUT").isVisible())
+				fragmentManager.beginTransaction().replace(R.id.container, AboutFragment.newInstance(), "ABOUT").addToBackStack(null).commit();
 			break;
 		case 4:
-			fragmentManager.beginTransaction().replace(R.id.container, ContactFragment.newInstance(position + 1)).commit();
+			if(fragmentManager.findFragmentByTag("CONTACT") == null || !fragmentManager.findFragmentByTag("CONTACT").isVisible())
+				fragmentManager.beginTransaction().replace(R.id.container, ContactFragment.newInstance(position + 1), "CONTACT").addToBackStack(null).commit();
 			break;
 		case 100:
-			fragmentManager.beginTransaction().replace(R.id.container, RacketsFragment.newInstance()).commit();
+			if(fragmentManager.findFragmentByTag("RACKETS") == null || !fragmentManager.findFragmentByTag("RACKETS").isVisible())
+				fragmentManager.beginTransaction().replace(R.id.container, RacketsFragment.newInstance(), "RACKETS").addToBackStack(null).commit();
 			break;
 		case 101:
-			fragmentManager.beginTransaction().replace(R.id.container, BagsFragment.newInstance(position + 1)).commit();
+			if(fragmentManager.findFragmentByTag("BAGS") == null || !fragmentManager.findFragmentByTag("BAGS").isVisible())
+				fragmentManager.beginTransaction().replace(R.id.container, BagsFragment.newInstance(position + 1), "BAGS").addToBackStack(null).commit();
 			break;
 		case 102:
-			fragmentManager.beginTransaction().replace(R.id.container, ShoesFragment.newInstance(position + 1)).commit();
+			if(fragmentManager.findFragmentByTag("SHOES") == null || !fragmentManager.findFragmentByTag("SHOES").isVisible())
+				fragmentManager.beginTransaction().replace(R.id.container, ShoesFragment.newInstance(position + 1),"SHOES").addToBackStack(null).commit();
 			break;
 		case 103:
-			fragmentManager.beginTransaction().replace(R.id.container, ApparelFragment.newInstance(position + 1)).commit();
+			if(fragmentManager.findFragmentByTag("APPAREL") == null || !fragmentManager.findFragmentByTag("APPAREL").isVisible())
+				fragmentManager.beginTransaction().replace(R.id.container, ApparelFragment.newInstance(position + 1), "APPAREL").addToBackStack(null).commit();
 			break;
 
 		}
-
 	}
 
 	public void onSectionAttached(int number) {
 		Log.d("The Section is", "The section is " + number);
 		switch (number) {
-		case 1:
+		case 0:
 			mTitle = getString(R.string.title_section1);
 			break;
 		case 2:
@@ -164,8 +177,23 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
+	public void setupData() {
+		ArrayList<Product> rackets = Singleton.INSTANCE.getRackets();
+		ArrayList<String> urls = new ArrayList<String>();
+		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR700FX_1.jpg");
+		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR700FX_2.jpg");
+		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR700FX_3.jpg");
+		rackets.add(new Product("NANORAY 700FX", "NANORAY’s revolutionary frame design with TOUGHLEX for flexible, all-round attack and defence play.",urls,null));
+		urls = new ArrayList<String>();
+		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR800_1.jpg");
+		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR800_2.jpg");
+		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR800_3.jpg");
+		rackets.add(new Product("NANORAY 800", "X-FULLERINE combined with SONIC METAL produces a fast and controlled swing that generates powerfully accurate, rapid-fire shots.",urls,null));
+		urls = new ArrayList<String>();
+		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR-ZSP_1-1.jpg");
+		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR-ZSP_2.jpg");
+		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR-ZSP_3.jpg");
+		rackets.add(new Product("NANORAY Z-SPEED", "The world’s fastest racquet.",urls,null));
+	}
 
 }

@@ -20,7 +20,6 @@ public class StringingServicesFragment extends Fragment{
 		// TODO Auto-generated constructor stub
 	}
 
-
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */

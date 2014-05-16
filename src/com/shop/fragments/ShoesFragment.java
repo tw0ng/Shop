@@ -1,29 +1,34 @@
 package com.shop.fragments;
 
 
+import java.util.ArrayList;
+
 import com.example.shop.R;
 import com.shop.MainActivity;
+import com.shop.Singleton;
+import com.shop.adapters.ProductAdapter;
+import com.shop.objects.Product;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ShoesFragment extends Fragment{
+	private ArrayList<Product> shoes;
 	public ShoesFragment() {
 		// TODO Auto-generated constructor stub
+		shoes = Singleton.INSTANCE.getShoes();
 	}
-
-	/**
-	 * The fragment argument representing the section number for this
-	 * fragment.
-	 */
-	private static final String ARG_SECTION_NUMBER = "section_number";
 
 	/**
 	 * Returns a new instance of this fragment for the given section number.
@@ -31,7 +36,6 @@ public class ShoesFragment extends Fragment{
 	public static ShoesFragment newInstance(int sectionNumber) {
 		ShoesFragment fragment = new ShoesFragment();
 		Bundle args = new Bundle();
-		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -39,19 +43,28 @@ public class ShoesFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_shoes, container,
+		ListView rootView = (ListView) inflater.inflate(R.layout.fragment_shoes, container,
 				false);
-		TextView textView = (TextView) rootView
-				.findViewById(R.id.section_label);
-		textView.setText("Hello how are you " + Integer.toString(getArguments().getInt(
-				ARG_SECTION_NUMBER)));
+		ProductAdapter shoesadapter = new ProductAdapter(getActivity().getApplicationContext(),R.layout.fragment_shoes, shoes);
+        rootView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Log.d("The position for racquets is","The position is "+ position + " There is a racquet? " + shoes.get(position).getName());
+				getFragmentManager().beginTransaction().replace(R.id.container, ProductFragment.newInstance(shoes.get(position))).addToBackStack(null).commit();
+			}
+        	
+        });
+		rootView.setAdapter(shoesadapter);
 		return rootView;
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		((MainActivity) activity).onSectionAttached(getArguments().getInt(
-				ARG_SECTION_NUMBER));
+		((MainActivity) activity).onSectionAttached(
+				102);
 	}
 }

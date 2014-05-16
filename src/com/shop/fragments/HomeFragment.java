@@ -20,18 +20,11 @@ public class HomeFragment extends Fragment{
 	}
 
 	/**
-	 * The fragment argument representing the section number for this
-	 * fragment.
-	 */
-	private static final String ARG_SECTION_NUMBER = "section_number";
-
-	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
 	public static HomeFragment newInstance(int sectionNumber) {
 		HomeFragment fragment = new HomeFragment();
 		Bundle args = new Bundle();
-		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -43,15 +36,13 @@ public class HomeFragment extends Fragment{
 				false);
 		TextView textView = (TextView) rootView
 				.findViewById(R.id.section_label);
-		textView.setText("Hello how are you " + Integer.toString(getArguments().getInt(
-				ARG_SECTION_NUMBER)));
+		textView.setText("Hello how are you ");
 		return rootView;
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		((MainActivity) activity).onSectionAttached(getArguments().getInt(
-				ARG_SECTION_NUMBER));
+		((MainActivity) activity).onSectionAttached(0);
 	}
 }

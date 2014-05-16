@@ -22,6 +22,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,16 +32,12 @@ public class ContactFragment extends Fragment{
 	private GoogleMap map;
 	private SupportMapFragment mapFrag;
 	private FragmentActivity context;
-	 static final LatLng SHOP = new LatLng(37.5208218,-122.0399597);
+	static final LatLng SHOP = new LatLng(37.5208218,-122.0399597);
 	public ContactFragment() {
 		// TODO Auto-generated constructor stub
+		if(mapFrag != null)
+			context.getSupportFragmentManager().beginTransaction().remove(mapFrag).commit();
 	}
-
-	/**
-	 * The fragment argument representing the section number for this
-	 * fragment.
-	 */
-	private static final String ARG_SECTION_NUMBER = "section_number";
 
 	/**
 	 * Returns a new instance of this fragment for the given section number.
@@ -48,7 +45,6 @@ public class ContactFragment extends Fragment{
 	public static ContactFragment newInstance(int sectionNumber) {
 		ContactFragment fragment = new ContactFragment();
 		Bundle args = new Bundle();
-		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -59,38 +55,44 @@ public class ContactFragment extends Fragment{
 		View rootView = inflater.inflate(R.layout.fragment_contact, container,
 				false);
 		mapFrag = (SupportMapFragment) context.getSupportFragmentManager().findFragmentById(R.id.map);
+
 		map = mapFrag.getMap();
 		ViewGroup.LayoutParams params = mapFrag.getView().getLayoutParams();
 		params.height = Util.getActivityWidth(context);
 		Log.d("what is height and width", "The measures are " + params.width + " " + params.height);
 		mapFrag.getView().setLayoutParams(params);
-		
-	    if(map!=null) {
-	        
-	    	Marker shop = map.addMarker(new MarkerOptions().position(SHOP));
-	    	shop.setTitle("AKBADMINTON");
-	    	shop.showInfoWindow();
-	    	map.moveCamera(CameraUpdateFactory.newLatLngZoom(SHOP, 15));
-	    	map.setOnMapClickListener(new OnMapClickListener() {
+
+		if(map!=null) {
+
+			Marker shop = map.addMarker(new MarkerOptions().position(SHOP));
+			shop.setTitle("AKBADMINTON");
+			shop.showInfoWindow();
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(SHOP, 15));
+			map.setOnMapClickListener(new OnMapClickListener() {
 
 				@Override
 				public void onMapClick(LatLng arg0) {
 					String url = "http://maps.google.com/maps?daddr=37800 Central Ct Newark, CA 94560";
-	    			Intent intent = new Intent(android.content.Intent.ACTION_VIEW,  Uri.parse(url));
-                   startActivity(intent);
+					Intent intent = new Intent(android.content.Intent.ACTION_VIEW,  Uri.parse(url));
+					startActivity(intent);
 				}
-	    		
-	    	});
-	    	
-	    }
+
+			});
+
+		}
 		return rootView;
 	}
-
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		if(mapFrag != null)
+			context.getSupportFragmentManager().beginTransaction().remove(mapFrag).commit();
+	}
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		context = (FragmentActivity) activity;
-		((MainActivity) activity).onSectionAttached(getArguments().getInt(
-				ARG_SECTION_NUMBER));
+		((MainActivity) activity).onSectionAttached(4);
 	}
 }
