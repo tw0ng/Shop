@@ -63,7 +63,7 @@ public class CartAdapter extends ArrayAdapter<Product> {
 					notifyDataSetChanged();
 				}
 			});
-            view.invalidate();
+            notifyDataSetChanged();
 		}
 		return view;
 	}
