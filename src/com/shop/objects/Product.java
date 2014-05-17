@@ -9,8 +9,8 @@ public class Product {
 	private String description;
 	private ArrayList<String> urls;
 	private String category;
-
-	public Product(String name, String description, ArrayList<String> urls, String category) {
+	private int quantity;
+	public Product(String name, String description, ArrayList<String> urls, String category, int quantity) {
 		this.urls = new ArrayList<String>();
 		if(name != null)
 			this.name = name;
@@ -26,11 +26,13 @@ public class Product {
 			for(String i:urls) {
 				this.urls.add(i);
 			}
-		
+
 		if(category != null)
 			this.category = category;
 		else
 			this.category = "";
+
+		this.quantity = quantity;
 	}
 
 	public String getName() {
@@ -49,4 +51,23 @@ public class Product {
 		return category;
 	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void updateQuantity(int quantity) {
+		this.quantity += quantity;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+
+		if(!(o instanceof Product))
+			return false;
+		if(!this.name.equals(((Product) o).getName()))
+			return false;
+
+		return true;
+
+	}
 }

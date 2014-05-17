@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.example.shop.R;
 import com.shop.MainActivity;
 import com.shop.Singleton;
+import com.shop.adapters.CartAdapter;
 import com.shop.adapters.ProductAdapter;
 import com.shop.objects.Product;
 import com.shop.util.Util;
@@ -18,25 +19,30 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class RacketsFragment extends Fragment{
-	private ArrayList<Product> rackets;
-	public RacketsFragment() {
+public class ShoppingCartFragment extends Fragment{
+	private ArrayList<Product> shoppingcart;
+	View rootView;
+	ListView cartContainer;
+	CartAdapter cartadapter;
+	public ShoppingCartFragment() {
 		// TODO Auto-generated constructor stub
-		rackets = Singleton.INSTANCE.getRackets();
+		shoppingcart = Singleton.INSTANCE.getShoppingCart();
 	}
 
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static RacketsFragment newInstance() {
-		RacketsFragment fragment = new RacketsFragment();
+	public static ShoppingCartFragment newInstance() {
+		ShoppingCartFragment fragment = new ShoppingCartFragment();
 		Bundle args = new Bundle();
 		fragment.setArguments(args);
 		return fragment;
@@ -45,28 +51,28 @@ public class RacketsFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		ListView rootView = (ListView) inflater.inflate(R.layout.fragment_rackets, container,
+		rootView = (View) inflater.inflate(R.layout.fragment_shoppingcart, container,
 				false);
-		ProductAdapter racketadapter = new ProductAdapter(getActivity().getApplicationContext(),R.layout.fragment_rackets, rackets);
-        rootView.setOnItemClickListener(new OnItemClickListener() {
-
+		cartContainer = (ListView) rootView.findViewById(R.id.cart_container);
+		Button checkout = (Button) rootView.findViewById(R.id.checkout);
+		checkout.setOnClickListener(new OnClickListener() {
+			
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Log.d("The position for racquets is","The position is "+ position + " There is a racquet? " + rackets.get(position).getName());
-				getFragmentManager().beginTransaction().replace(R.id.container, ProductFragment.newInstance(rackets.get(position))).addToBackStack(null).commit();
+				
 			}
-        	
-        });
-		rootView.setAdapter(racketadapter);
+		});
+		cartadapter = new CartAdapter(getActivity().getApplicationContext(),R.layout.fragment_shoppingcart, shoppingcart);
+
+		cartContainer.setAdapter(cartadapter);
 		return rootView;
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		((MainActivity) activity).onSectionAttached(100);
+		((MainActivity) activity).onSectionAttached(200);
 	}
 		
 }

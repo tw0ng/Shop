@@ -14,6 +14,7 @@ import com.shop.fragments.HomeFragment;
 import com.shop.fragments.NavigationDrawerFragment;
 import com.shop.fragments.RacketsFragment;
 import com.shop.fragments.ShoesFragment;
+import com.shop.fragments.ShoppingCartFragment;
 import com.shop.fragments.StringingServicesFragment;
 import com.shop.objects.Product;
 import com.shop.util.Util;
@@ -23,6 +24,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.content.ClipData.Item;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,9 +35,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -110,7 +114,6 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 			if(fragmentManager.findFragmentByTag("APPAREL") == null || !fragmentManager.findFragmentByTag("APPAREL").isVisible())
 				fragmentManager.beginTransaction().replace(R.id.container, ApparelFragment.newInstance(position + 1), "APPAREL").addToBackStack(null).commit();
 			break;
-
 		}
 	}
 
@@ -141,7 +144,9 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 		case 103:
 			mTitle = getString(R.string.child_title_section4);
 			break;
-
+		case 200:
+			mTitle = getString(R.string.shoppingcart);
+			break;
 		}
 	}
 
@@ -171,8 +176,13 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		switch (id) {
+		case R.id.action_settings:
+		   return true;
+		case R.id.action_example:
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			fragmentManager.beginTransaction().replace(R.id.container, ShoppingCartFragment.newInstance(), "SHOPPINGCART").addToBackStack(null).commit();
+            break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -183,17 +193,17 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR700FX_1.jpg");
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR700FX_2.jpg");
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR700FX_3.jpg");
-		rackets.add(new Product("NANORAY 700FX", "NANORAY’s revolutionary frame design with TOUGHLEX for flexible, all-round attack and defence play.",urls,null));
+		rackets.add(new Product("NANORAY 700FX", "NANORAY’s revolutionary frame design with TOUGHLEX for flexible, all-round attack and defence play.",urls,null, 0));
 		urls = new ArrayList<String>();
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR800_1.jpg");
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR800_2.jpg");
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR800_3.jpg");
-		rackets.add(new Product("NANORAY 800", "X-FULLERINE combined with SONIC METAL produces a fast and controlled swing that generates powerfully accurate, rapid-fire shots.",urls,null));
+		rackets.add(new Product("NANORAY 800", "X-FULLERINE combined with SONIC METAL produces a fast and controlled swing that generates powerfully accurate, rapid-fire shots.",urls,null, 0));
 		urls = new ArrayList<String>();
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR-ZSP_1-1.jpg");
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR-ZSP_2.jpg");
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR-ZSP_3.jpg");
-		rackets.add(new Product("NANORAY Z-SPEED", "The world’s fastest racquet.",urls,null));
+		rackets.add(new Product("NANORAY Z-SPEED", "The world’s fastest racquet.",urls,null, 0));
 	}
 
 }

@@ -18,4 +18,9 @@
     <string name="location">37800 Central Ct Newark, CA 94560</string>
     <string name="phone">5106664292</string>
     <string name="email">kakinami@aol.com</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="close">Cancel</string>
+    <string name="remove_from_cart">Remove From Cart</string>
+    <string name="checkout">Checkout</string>
+    <string name="shoppingcart">Shopping Cart</string>
 </resources>

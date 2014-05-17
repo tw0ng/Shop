@@ -7,6 +7,7 @@ import com.example.shop.R;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class CustomAdapter extends BaseExpandableListAdapter {
 	@Override
 	public View getChildView(int groupPosition, final int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
-
+        Log.d("Are there children?", "The child is " + this.children.get(this.header.get(groupPosition)).size() + " The header name " + this.header.get(groupPosition) + " The child is " + childPosition);
 		final String childText = (String) getChild(groupPosition, childPosition);
 
 		if (convertView == null) {
@@ -50,7 +51,7 @@ public class CustomAdapter extends BaseExpandableListAdapter {
 
 		TextView txtListChild = (TextView) convertView
 				.findViewById(R.id.item);
-
+        Log.d("The child exists? ", "Child is " + childText);
 		txtListChild.setText(childText);
 		return convertView;
 	}
