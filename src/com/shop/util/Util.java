@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -22,6 +23,7 @@ public class Util {
 		DisplayMetrics displaymetrics = new DisplayMetrics();
 		current.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
 		int width = displaymetrics.widthPixels;
+		Log.d("Layout is", "The width is " + width);
 		return width;
 	}
 

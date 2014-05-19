@@ -25,7 +25,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.ClipData.Item;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,15 +68,23 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();
-
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
-		DisplayImageOptions displayopts = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisc(true).build();
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext()).memoryCacheExtraOptions(Util.getActivityWidth(this) * 5, Util.getActivityHeight(this) * 5).defaultDisplayImageOptions(displayopts).build();
-		ImageLoader.getInstance().init(config);
-		setupData();
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		if(fragmentManager.getBackStackEntryCount() == 0) {
+			DisplayImageOptions displayopts = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisc(true).build();
+			ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext()).memoryCacheExtraOptions(Util.getActivityWidth(this) * 5, Util.getActivityHeight(this) * 5).defaultDisplayImageOptions(displayopts).build();
+			ImageLoader.getInstance().init(config);
+			setupData();
+		}
+		else {
+           Log.d("Data initialized", "Data initialized!");
+           fragmentManager.popBackStackImmediate();
+		}
 	}
+
+
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
@@ -118,7 +128,6 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 	}
 
 	public void onSectionAttached(int number) {
-		Log.d("The Section is", "The section is " + number);
 		switch (number) {
 		case 0:
 			mTitle = getString(R.string.title_section1);
@@ -178,11 +187,11 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 		int id = item.getItemId();
 		switch (id) {
 		case R.id.action_settings:
-		   return true;
+			return true;
 		case R.id.action_example:
 			FragmentManager fragmentManager = getSupportFragmentManager();
 			fragmentManager.beginTransaction().replace(R.id.container, ShoppingCartFragment.newInstance(), "SHOPPINGCART").addToBackStack(null).commit();
-            break;
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -193,7 +202,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR700FX_1.jpg");
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR700FX_2.jpg");
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR700FX_3.jpg");
-		rackets.add(new Product("NANORAY 700FX", "NANORAY’s revolutionary frame design with TOUGHLEX for flexible, all-round attack and defence play.",urls,null, 0));
+		rackets.add(new Product("NANORAY 700FX", "NANORAY’s revolutionary frame design with TOUGHLEX for flexible, all-round attack and defence play.",urls,null, 2));
 		urls = new ArrayList<String>();
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR800_1.jpg");
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR800_2.jpg");
@@ -204,6 +213,7 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR-ZSP_2.jpg");
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR-ZSP_3.jpg");
 		rackets.add(new Product("NANORAY Z-SPEED", "The world’s fastest racquet.",urls,null, 0));
+		Singleton.INSTANCE.addToCart(rackets.get(0));
 	}
 
 }

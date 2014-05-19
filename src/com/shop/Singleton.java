@@ -2,6 +2,7 @@ package com.shop;
 
 import java.util.ArrayList;
 
+import android.app.Fragment;
 import android.util.Log;
 
 import com.shop.objects.Product;
@@ -14,6 +15,7 @@ public enum Singleton {
 	private ArrayList<Product> shoes = new ArrayList<Product>();
 	private ArrayList<Product> apparel = new ArrayList<Product>();
 	private ArrayList<Product> shoppingcart = new ArrayList<Product>();
+	private Fragment lastFrag = null;
 	public void setRackets(ArrayList<Product> rackets) {
 		this.rackets = rackets;
 	}
@@ -54,6 +56,7 @@ public enum Singleton {
 	}
 
 	public void removeFromCart(Product product) {
+		Log.d("Product removed was" , product.getName());
         if(shoppingcart.contains(product))
         	shoppingcart.remove(shoppingcart.indexOf(product));
 	}
@@ -70,5 +73,13 @@ public enum Singleton {
 	}
 	public ArrayList<Product> getShoppingCart() {
 		return shoppingcart;
+	}
+	
+	public void setFragment(Fragment f) {
+		lastFrag = f;
+	}
+	
+	public Fragment getFragment() {
+		return lastFrag;
 	}
 }
