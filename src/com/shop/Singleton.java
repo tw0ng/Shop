@@ -15,7 +15,7 @@ public enum Singleton {
 	private ArrayList<Product> shoes = new ArrayList<Product>();
 	private ArrayList<Product> apparel = new ArrayList<Product>();
 	private ArrayList<Product> shoppingcart = new ArrayList<Product>();
-	private Fragment lastFrag = null;
+	private ArrayList<Product> compare = new ArrayList<Product>();
 	public void setRackets(ArrayList<Product> rackets) {
 		this.rackets = rackets;
 	}
@@ -57,29 +57,33 @@ public enum Singleton {
 
 	public void removeFromCart(Product product) {
 		Log.d("Product removed was" , product.getName());
-        if(shoppingcart.contains(product))
-        	shoppingcart.remove(shoppingcart.indexOf(product));
+		if(shoppingcart.contains(product))
+			shoppingcart.remove(shoppingcart.indexOf(product));
 	}
-	
+
 	public Product getProductFromCart(Product product) {
-	   if(shoppingcart.contains(product)) {
-		   Log.d("product was gotten", "Got the product");
-		   return shoppingcart.get(shoppingcart.indexOf(product));
-	   }
-	   else {
-		   Log.d("hello", "no product in cart");
-		   return new Product(null, null, null, null, 0);
-	   }
+		if(shoppingcart.contains(product)) {
+			return shoppingcart.get(shoppingcart.indexOf(product));
+		}
+		else {
+			return new Product(null, null, null, null, 0);
+		}
 	}
 	public ArrayList<Product> getShoppingCart() {
 		return shoppingcart;
 	}
-	
-	public void setFragment(Fragment f) {
-		lastFrag = f;
+
+	public ArrayList<Product> getCompareList() {
+		return compare;
 	}
-	
-	public Fragment getFragment() {
-		return lastFrag;
+
+	public void removeFromList(int position) {
+		compare.remove(position);
+	}
+
+	public void addToList(Product product) {
+		if(!compare.contains(product)) {
+			compare.add(product);
+		}
 	}
 }

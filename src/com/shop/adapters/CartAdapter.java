@@ -52,7 +52,7 @@ public class CartAdapter extends ArrayAdapter<Product> {
 			TextView quantity = (TextView) view.findViewById(R.id.quantity);
 			Button remove = (Button) view.findViewById(R.id.remove_from_cart);
 
-//			view.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, ((WindowManager)  context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getHeight()));
+			view.setLayoutParams(new ListView.LayoutParams(ListView.LayoutParams.FILL_PARENT,  Util.getActivityHeight(context)/10));
 			if(item.getUrls() != null && item.getUrls().size() != 0)
 				ImageLoader.getInstance().displayImage(item.getUrls().get(0), productImage, new DisplayImageOptions.Builder().imageScaleType(ImageScaleType.IN_SAMPLE_INT).build());
 

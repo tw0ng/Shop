@@ -33,6 +33,28 @@ public class Util {
 		int height = displaymetrics.heightPixels;
 		return height;
 	}
+	
+
+	public static int getActivityWidth(Context ctxx) {
+		// no activity required
+		WindowManager wm = (WindowManager) ctxx.getApplicationContext()
+				.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		int width = display.getWidth();
+		return width;
+	}
+	
+	public static int getActivityHeight(Context ctxx) {
+		// no activity required
+		WindowManager wm = (WindowManager) ctxx.getApplicationContext()
+				.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		int height = display.getHeight();
+		return height;
+	}
+
 
 	public static int getNumCols(Context ctxx) {
 		int cols = 1;

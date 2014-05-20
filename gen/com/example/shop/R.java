@@ -1337,18 +1337,19 @@ containing a value of this type.
         public static final int fragment_addtocart=0x7f03001b;
         public static final int fragment_apparel=0x7f03001c;
         public static final int fragment_bags=0x7f03001d;
-        public static final int fragment_contact=0x7f03001e;
-        public static final int fragment_home=0x7f03001f;
-        public static final int fragment_navigation_drawer=0x7f030020;
-        public static final int fragment_product=0x7f030021;
-        public static final int fragment_rackets=0x7f030022;
-        public static final int fragment_shoes=0x7f030023;
-        public static final int fragment_shoppingcart=0x7f030024;
-        public static final int fragment_stringingservices=0x7f030025;
-        public static final int header=0x7f030026;
-        public static final int nav_item=0x7f030027;
-        public static final int product_item=0x7f030028;
-        public static final int support_simple_spinner_dropdown_item=0x7f030029;
+        public static final int fragment_compare=0x7f03001e;
+        public static final int fragment_contact=0x7f03001f;
+        public static final int fragment_home=0x7f030020;
+        public static final int fragment_navigation_drawer=0x7f030021;
+        public static final int fragment_product=0x7f030022;
+        public static final int fragment_rackets=0x7f030023;
+        public static final int fragment_shoes=0x7f030024;
+        public static final int fragment_shoppingcart=0x7f030025;
+        public static final int fragment_stringingservices=0x7f030026;
+        public static final int header=0x7f030027;
+        public static final int nav_item=0x7f030028;
+        public static final int product_item=0x7f030029;
+        public static final int support_simple_spinner_dropdown_item=0x7f03002a;
     }
     public static final class menu {
         public static final int global=0x7f0c0000;
@@ -1395,9 +1396,9 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int action_example=0x7f0a0036;
-        public static final int action_settings=0x7f0a0037;
-        public static final int add_to_cart=0x7f0a003c;
+        public static final int action_example=0x7f0a0037;
+        public static final int action_settings=0x7f0a0038;
+        public static final int add_to_cart=0x7f0a003d;
         public static final int app_name=0x7f0a002b;
         /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=70] 
          */
@@ -1412,12 +1413,12 @@ containing a value of this type.
          */
         public static final int auth_client_requested_by_msg=0x7f0a001e;
         public static final int auth_client_using_bad_version_title=0x7f0a0027;
-        public static final int checkout=0x7f0a003f;
-        public static final int child_title_section1=0x7f0a0030;
-        public static final int child_title_section2=0x7f0a0031;
-        public static final int child_title_section3=0x7f0a0032;
-        public static final int child_title_section4=0x7f0a0033;
-        public static final int close=0x7f0a003d;
+        public static final int checkout=0x7f0a0040;
+        public static final int child_title_section1=0x7f0a0031;
+        public static final int child_title_section2=0x7f0a0032;
+        public static final int child_title_section3=0x7f0a0033;
+        public static final int child_title_section4=0x7f0a0034;
+        public static final int close=0x7f0a003e;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -1478,9 +1479,9 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f0a001b;
-        public static final int contact_header=0x7f0a0038;
-        public static final int email=0x7f0a003b;
-        public static final int location=0x7f0a0039;
+        public static final int contact_header=0x7f0a0039;
+        public static final int email=0x7f0a003c;
+        public static final int location=0x7f0a003a;
         /**  Location client code resources (prefix with location_client) 
 
         Begin strings for location.reporting
@@ -1492,15 +1493,16 @@ containing a value of this type.
         public static final int location_client_ulr_inactive_age_under_13=0x7f0a001f;
         public static final int location_client_ulr_inactive_age_unknown=0x7f0a0020;
         public static final int location_client_ulr_inactive_unknown_restriction=0x7f0a0021;
-        public static final int navigation_drawer_close=0x7f0a0035;
-        public static final int navigation_drawer_open=0x7f0a0034;
-        public static final int phone=0x7f0a003a;
-        public static final int remove_from_cart=0x7f0a003e;
-        public static final int shoppingcart=0x7f0a0040;
+        public static final int navigation_drawer_close=0x7f0a0036;
+        public static final int navigation_drawer_open=0x7f0a0035;
+        public static final int phone=0x7f0a003b;
+        public static final int remove_from_cart=0x7f0a003f;
+        public static final int shoppingcart=0x7f0a0041;
         public static final int title_section1=0x7f0a002c;
         public static final int title_section2=0x7f0a002d;
         public static final int title_section3=0x7f0a002e;
         public static final int title_section4=0x7f0a002f;
+        public static final int title_section5=0x7f0a0030;
     }
     public static final class style {
         /** 

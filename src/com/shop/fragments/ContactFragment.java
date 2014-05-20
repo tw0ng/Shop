@@ -26,6 +26,7 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.TextView;
 
 public class ContactFragment extends Fragment{
@@ -35,14 +36,13 @@ public class ContactFragment extends Fragment{
 	static final LatLng SHOP = new LatLng(37.5208218,-122.0399597);
 	public ContactFragment() {
 		// TODO Auto-generated constructor stub
-		if(mapFrag != null)
-			context.getSupportFragmentManager().beginTransaction().remove(mapFrag).commit();
+
 	}
 
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static ContactFragment newInstance(int sectionNumber) {
+	public static ContactFragment newInstance() {
 		ContactFragment fragment = new ContactFragment();
 		Bundle args = new Bundle();
 		fragment.setArguments(args);
@@ -80,14 +80,17 @@ public class ContactFragment extends Fragment{
 			});
 
 		}
+
 		return rootView;
 	}
 	@Override
 	public void onDestroyView() {
 		// TODO Auto-generated method stub
 		super.onDestroyView();
-		if(mapFrag != null)
-			context.getSupportFragmentManager().beginTransaction().remove(mapFrag).commit();
+		SupportMapFragment f = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
+		if(f.isResumed()) {
+			getFragmentManager().beginTransaction().remove(f).commit();
+		}
 	}
 	@Override
 	public void onAttach(Activity activity) {

@@ -33,7 +33,7 @@ public class ShoesFragment extends Fragment{
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static ShoesFragment newInstance(int sectionNumber) {
+	public static ShoesFragment newInstance() {
 		ShoesFragment fragment = new ShoesFragment();
 		Bundle args = new Bundle();
 		fragment.setArguments(args);

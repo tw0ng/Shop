@@ -33,7 +33,7 @@ public class BagsFragment extends Fragment{
 	/**
 	 * Returns a new instance of this fragment for the given section number.
 	 */
-	public static BagsFragment newInstance(int sectionNumber) {
+	public static BagsFragment newInstance() {
 		BagsFragment fragment = new BagsFragment();
 		Bundle args = new Bundle();
 		fragment.setArguments(args);

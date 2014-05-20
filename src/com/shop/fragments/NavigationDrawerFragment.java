@@ -147,6 +147,7 @@ public class NavigationDrawerFragment extends Fragment {
 		headerdata.add("Stringing Services");
 		headerdata.add("About");
 		headerdata.add("Contact");
+		headerdata.add("Compare");
 
 		// Adding child data
 		ArrayList<String> shop = new ArrayList<String>();

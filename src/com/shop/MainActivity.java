@@ -9,6 +9,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.shop.fragments.AboutFragment;
 import com.shop.fragments.ApparelFragment;
 import com.shop.fragments.BagsFragment;
+import com.shop.fragments.CompareFragment;
 import com.shop.fragments.ContactFragment;
 import com.shop.fragments.HomeFragment;
 import com.shop.fragments.NavigationDrawerFragment;
@@ -68,7 +69,6 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();
-		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 		FragmentManager fragmentManager = getSupportFragmentManager();
@@ -79,7 +79,6 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 			setupData();
 		}
 		else {
-           Log.d("Data initialized", "Data initialized!");
            fragmentManager.popBackStackImmediate();
 		}
 	}
@@ -106,7 +105,11 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 			break;
 		case 4:
 			if(fragmentManager.findFragmentByTag("CONTACT") == null || !fragmentManager.findFragmentByTag("CONTACT").isVisible())
-				fragmentManager.beginTransaction().replace(R.id.container, ContactFragment.newInstance(position + 1), "CONTACT").addToBackStack(null).commit();
+				fragmentManager.beginTransaction().replace(R.id.container, ContactFragment.newInstance(), "CONTACT").addToBackStack(null).commit();
+			break;
+		case 5:
+			if(fragmentManager.findFragmentByTag("COMPARE") == null || !fragmentManager.findFragmentByTag("COMPARE").isVisible())
+				fragmentManager.beginTransaction().replace(R.id.container, CompareFragment.newInstance(), "COMPARE").addToBackStack(null).commit();
 			break;
 		case 100:
 			if(fragmentManager.findFragmentByTag("RACKETS") == null || !fragmentManager.findFragmentByTag("RACKETS").isVisible())
@@ -114,15 +117,15 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 			break;
 		case 101:
 			if(fragmentManager.findFragmentByTag("BAGS") == null || !fragmentManager.findFragmentByTag("BAGS").isVisible())
-				fragmentManager.beginTransaction().replace(R.id.container, BagsFragment.newInstance(position + 1), "BAGS").addToBackStack(null).commit();
+				fragmentManager.beginTransaction().replace(R.id.container, BagsFragment.newInstance(), "BAGS").addToBackStack(null).commit();
 			break;
 		case 102:
 			if(fragmentManager.findFragmentByTag("SHOES") == null || !fragmentManager.findFragmentByTag("SHOES").isVisible())
-				fragmentManager.beginTransaction().replace(R.id.container, ShoesFragment.newInstance(position + 1),"SHOES").addToBackStack(null).commit();
+				fragmentManager.beginTransaction().replace(R.id.container, ShoesFragment.newInstance(),"SHOES").addToBackStack(null).commit();
 			break;
 		case 103:
 			if(fragmentManager.findFragmentByTag("APPAREL") == null || !fragmentManager.findFragmentByTag("APPAREL").isVisible())
-				fragmentManager.beginTransaction().replace(R.id.container, ApparelFragment.newInstance(position + 1), "APPAREL").addToBackStack(null).commit();
+				fragmentManager.beginTransaction().replace(R.id.container, ApparelFragment.newInstance(), "APPAREL").addToBackStack(null).commit();
 			break;
 		}
 	}
@@ -140,6 +143,9 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 			break;
 		case 4:
 			mTitle = getString(R.string.title_section4);
+			break;
+		case 5:
+			mTitle = getString(R.string.title_section5);
 			break;
 		case 100:
 			mTitle = getString(R.string.child_title_section1);
@@ -214,6 +220,9 @@ NavigationDrawerFragment.NavigationDrawerCallbacks {
 		urls.add("http://www.akbadminton.com/wp-content/uploads/2014/05/NR-ZSP_3.jpg");
 		rackets.add(new Product("NANORAY Z-SPEED", "The world’s fastest racquet.",urls,null, 0));
 		Singleton.INSTANCE.addToCart(rackets.get(0));
+		Singleton.INSTANCE.addToList(rackets.get(0));
+		Singleton.INSTANCE.addToList(rackets.get(1));
+		Singleton.INSTANCE.addToList(rackets.get(2));
 	}
 
 }
